@@ -1,10 +1,23 @@
 
 .calculator{
-  background-color: rgb(141, 141, 141);
-  height: 575px;
-  width: 500px;
+  width: 800px;
   margin: 0 auto;
-  }
+}
+.history{
+
+}
+.calculatorContainer{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}
+.calculator-body{
+  width: 100%;
+  height: 100px;
+  margin:0 auto;
+}
+
 .calculator-head{
   background-color: rgb(85, 85, 85);
   color:#fff; 
@@ -15,14 +28,37 @@
   padding:30px;
   font-size: 1.5rem;
 }
-.calculator-body{
-  background-color: rgb(117, 117, 117);
-  width: 100%;
-  height: 100px;
-  margin:0 auto;
-}
+
+
 .calculator-row{
+  background-color: rgb(141, 141, 141);
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.histoyBtn{
+  border-radius: 50%;
+  float: right;
+  outline: none;
+  border:none
+}
+.histoyBtn:active {
+  -webkit-animation: rotation 0.5s  linear;
+}
+
+@-webkit-keyframes rotation {
+  from {
+          -webkit-transform: rotate(0deg);
+  }
+  to {
+          -webkit-transform: rotate(180deg);
+  }
+}
+
+.historyItem{
+}
+.historyBox{
+  position: relative;
+  right: 50px;
 }

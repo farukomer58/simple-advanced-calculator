@@ -13,6 +13,7 @@ const AppProvider = ({ children }) => {
 
     const [negative, setNegative] = useState(false)
     const [canPlaceDot, setCanPlaceDot] = useState(true)
+    const [history, setHistory] = useState([])
 
     // Used to calculate from a string
     const Parser = require('expr-eval').Parser;
@@ -21,8 +22,6 @@ const AppProvider = ({ children }) => {
     const setClickedButton = (e, isNumber, isOperation) => {
         e.preventDefault()
         const value = e.target.value
-        console.log(displayValue)
-        console.log(value)
 
         if (isNumber) {
             setIsLastOperation(false)
@@ -44,7 +43,6 @@ const AppProvider = ({ children }) => {
             } else {
 
                 setDisplayValue(displayValue + value)
-                console.log("Hey you should add value to displayValue", value, displayValue)
                 setIsLastOperation(false)
             }
 
@@ -103,13 +101,14 @@ const AppProvider = ({ children }) => {
         e.preventDefault()
         const value = e.target.value
 
-        if (displayValue != "") {
+        if (displayValue != "" && operations.length>0) {
             try {
                 const parser = new Parser();
                 let expression = parser.parse(displayValue);
                 let result = expression.evaluate({ x: 3 });
-
+                let calculation = displayValue
                 setDisplayValue(isNaN(result) ? "Error" : result.toString())
+                setHistory([...history, {calculation:calculation,result:result, isInt: result%1===0}])
                 setOperations([])
                 setCanPlaceDot(result.toString().includes(".") ? false : true)
                 setNegative((result < 0))
@@ -121,9 +120,7 @@ const AppProvider = ({ children }) => {
 
     // Register the key press and add to calculation
     const handleKeyPress = (event) => {
-        console.log(event.key)
         if (event.key === '=' || event.key === 'Enter') {
-            console.log("Yo I should do calculation")
             calculate(event)
         } else {
             const pressedKey = allowedKeys[event.key]
@@ -140,6 +137,7 @@ const AppProvider = ({ children }) => {
         isLastOperation:isLastOperation,
         negative:negative,
         canPlaceDot:canPlaceDot,
+        history:history,
         setClickedButton: setClickedButton,
         calculate: calculate,
         handleKeyPress:handleKeyPress,
