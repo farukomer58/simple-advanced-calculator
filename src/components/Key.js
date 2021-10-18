@@ -1,13 +1,17 @@
 import React from 'react'
+import { useGlobalContext } from '../context/context'
 
-function Key({ btnKey, value, setClickedButton, calculate }) {
+function Key({ btnKey, value}) {
+
+    const { context } = useGlobalContext()
+
     if (btnKey === '=') {
         return (
-            <button onClick={(e) => calculate(e)} value={btnKey}>{btnKey}</button>
+            <button onClick={(e) => context.calculate(e)} value={btnKey}>{btnKey}</button>
         )
     } else {
         return (
-            <button onClick={(e) => setClickedButton(e, value.isNumber, value.isOperation)} value={btnKey}>{btnKey}</button>
+            <button onClick={(e) => context.setClickedButton(e, value.isNumber, value.isOperation)} value={btnKey}>{btnKey}</button>
         )
     }
 

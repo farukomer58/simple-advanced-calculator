@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useGlobalContext } from './context/context'
 import { keyData, allowedKeys } from "./context/data"
 import CalculatorHead from "./components/CalculatorHead";
-import KeyRow2 from './components/KeyRow2'
+import KeyRow from './components/KeyRow'
 
 function Calculator() {
 
@@ -26,7 +26,7 @@ function Calculator() {
 
                 {/* display Button keys */}
                 {keyData.map((keyRow, index) => {
-                    return <KeyRow2 key={index} keyRow={keyRow} />
+                    return <KeyRow key={index} keyRow={keyRow} />
                 })}
 
             </div>
